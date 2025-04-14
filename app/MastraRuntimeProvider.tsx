@@ -7,11 +7,30 @@ import {
   AssistantRuntimeProvider,
 } from '@assistant-ui/react';
 import { MastraClient } from '@mastra/client-js';
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, createContext, useContext } from 'react';
 
 const mastra = new MastraClient({
   baseUrl: process.env.NEXT_PUBLIC_MASTRA_API_URL || 'http://localhost:4111',
 });
+
+export interface Artifact {
+  content: string;
+  title: string;
+  timestamp: Date;
+}
+
+interface ArtifactContextType {
+  artifacts: Artifact[];
+  addArtifact: (content: string) => void;
+}
+
+const ArtifactContext = createContext<ArtifactContextType | null>(null);
+
+export const useArtifacts = () => {
+  const context = useContext(ArtifactContext);
+  if (!context) throw new Error('useArtifacts must be used within MastraRuntimeProvider');
+  return context;
+};
 
 const convertMessage = (message: ThreadMessageLike): ThreadMessageLike => {
   return message;
@@ -24,6 +43,16 @@ export function MastraRuntimeProvider({
 }>) {
   const [isRunning, setIsRunning] = useState(false);
   const [messages, setMessages] = useState<ThreadMessageLike[]>([]);
+  const [artifacts, setArtifacts] = useState<Artifact[]>([]);
+
+  const addArtifact = (content: string) => {
+    const newArtifact: Artifact = {
+      content,
+      title: `Generated Content ${artifacts.length + 1}`,
+      timestamp: new Date(),
+    };
+    setArtifacts(prev => [...prev, newArtifact]);
+  };
 
   const onNew = async (message: AppendMessage) => {
     if (message.content[0]?.type !== 'text') throw new Error('Only text messages are supported');
@@ -33,7 +62,7 @@ export function MastraRuntimeProvider({
     setIsRunning(true);
 
     try {
-      const workflow = mastra.getWorkflow('webpageContentWorkflow'); // Replace with your actual workflow ID
+      const workflow = mastra.getWorkflow('webpageContentWorkflow');
       const result = await workflow.execute({
         input: {
           messages: [
@@ -45,11 +74,13 @@ export function MastraRuntimeProvider({
         },
       });
 
-      // Process the workflow result - using a simple approach
       const responseText = typeof result === 'string' 
         ? result 
-        : JSON.stringify(result) || 'No response from workflow';
+        : JSON.stringify(result, null, 2);
       
+      // Add the response as an artifact
+      addArtifact(responseText);
+
       setMessages(currentConversation => {
         const message: ThreadMessageLike = {
           role: 'assistant',
@@ -80,5 +111,11 @@ export function MastraRuntimeProvider({
     onNew,
   });
 
-  return <AssistantRuntimeProvider runtime={runtime}>{children}</AssistantRuntimeProvider>;
+  return (
+    <ArtifactContext.Provider value={{ artifacts, addArtifact }}>
+      <AssistantRuntimeProvider runtime={runtime}>
+        {children}
+      </AssistantRuntimeProvider>
+    </ArtifactContext.Provider>
+  );
 }
