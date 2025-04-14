@@ -9,16 +9,16 @@ export async function POST(request: Request) {
   try {
     const { message } = await request.json();
 
+    if (!message) {
+      return NextResponse.json(
+        { error: 'User prompt is required to generate content structure' },
+        { status: 400 }
+      );
+    }
+
     const workflow = mastra.getWorkflow('webpageContentWorkflow');
     const result = await workflow.execute({
-      input: {
-        messages: [
-          {
-            role: 'user',
-            content: message,
-          },
-        ],
-      },
+        userPrompt: message,
     });
 
     const response = typeof result === 'string' ? result : JSON.stringify(result, null, 2);
