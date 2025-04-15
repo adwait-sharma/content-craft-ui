@@ -97,53 +97,52 @@ export function MyAssistant() {
             {messages.length === 0 ? (
               // Welcome Screen
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center py-8">
-                <Logo className="h-16 w-16 mb-6" />
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">
-                  Welcome to Contentstack AI Studio
-                </h2>
-                <h1 className="text-4xl font-serif text-gray-800 dark:text-gray-200 mb-4 tracking-normal">
-                  Hey there, Adwait
-                </h1>
-                <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mb-8">
+                <Logo className="h-16 w-16 mb-8" />
+                <div className="flex items-center gap-3 mb-3">
+                  <h2 className="text-2xl font-medium text-gray-900 dark:text-white tracking-tight">
+                    Contentstack AI Studio
+                  </h2>
+                </div>
+                <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mb-8 font-light">
                   Your AI-powered content assistant. Start typing below to craft amazing content together.
                 </p>
                 
                 {/* Pre-written Prompts */}
-                <div className="w-full max-w-5xl flex justify-center space-x-2">
+                <div className="w-full max-w-4xl flex justify-center space-x-3">
                   <button 
                     onClick={() => setInput("Help me create a product description for an eco-friendly water bottle")}
-                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                    className="flex items-center px-4 py-1.5 border border-gray-300 text-gray-700 rounded-md hover:border-gray-400 hover:bg-gray-50 transition-colors"
                   >
-                    <span className="text-sm text-gray-800 dark:text-gray-200">Product description</span>
-                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                    <span className="text-sm">Product description</span>
+                    <span className="ml-2 text-gray-400">→</span>
                   </button>
                   <button 
                     onClick={() => setInput("Generate a social media campaign for a new coffee shop")}
-                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                    className="flex items-center px-4 py-1.5 border border-gray-300 text-gray-700 rounded-md hover:border-gray-400 hover:bg-gray-50 transition-colors"
                   >
-                    <span className="text-sm text-gray-800 dark:text-gray-200">Social media</span>
-                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                    <span className="text-sm">Social media</span>
+                    <span className="ml-2 text-gray-400">→</span>
                   </button>
                   <button 
                     onClick={() => setInput("Write a blog post about AI in content management")}
-                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                    className="flex items-center px-4 py-1.5 border border-gray-300 text-gray-700 rounded-md hover:border-gray-400 hover:bg-gray-50 transition-colors"
                   >
-                    <span className="text-sm text-gray-800 dark:text-gray-200">Blog post</span>
-                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                    <span className="text-sm">Blog post</span>
+                    <span className="ml-2 text-gray-400">→</span>
                   </button>
                   <button 
                     onClick={() => setInput("Create an email newsletter about upcoming tech trends")}
-                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                    className="flex items-center px-4 py-1.5 border border-gray-300 text-gray-700 rounded-md hover:border-gray-400 hover:bg-gray-50 transition-colors"
                   >
-                    <span className="text-sm text-gray-800 dark:text-gray-200">Newsletter</span>
-                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                    <span className="text-sm">Newsletter</span>
+                    <span className="ml-2 text-gray-400">→</span>
                   </button>
                   <button 
                     onClick={() => setInput("Generate SEO-optimized website content for a fitness studio")}
-                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                    className="flex items-center px-4 py-1.5 border border-gray-300 text-gray-700 rounded-md hover:border-gray-400 hover:bg-gray-50 transition-colors"
                   >
-                    <span className="text-sm text-gray-800 dark:text-gray-200">SEO content</span>
-                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                    <span className="text-sm">SEO content</span>
+                    <span className="ml-2 text-gray-400">→</span>
                   </button>
                 </div>
               </div>
@@ -240,12 +239,12 @@ export function MyAssistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message..."
-              className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:focus:ring-blue-400 placeholder-gray-500 dark:placeholder-gray-400"
+              className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:focus:ring-purple-400 placeholder-gray-500 dark:placeholder-gray-400"
             />
             <button
               type="submit"
               disabled={isLoading}
-              className="px-4 py-2.5 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:hover:bg-blue-600 dark:disabled:hover:bg-blue-500"
+              className="px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 transition-all duration-200 ease-in-out"
             >
               <SendIcon className="w-5 h-5" />
             </button>
