@@ -165,38 +165,33 @@ export function MyAssistant() {
                         onClick={() => setSelectedMessage(message)}
                         className="w-full cursor-pointer"
                       >
-                        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                          <div className="px-6 py-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h3 className="text-sm font-medium text-gray-900 dark:text-white">Generated Content</h3>
-                              <span className="text-xs text-gray-500 dark:text-gray-400">Document</span>
+                        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm p-6 hover:border-gray-300 dark:hover:border-gray-600 transition-colors relative overflow-hidden group">
+                          <div className="absolute inset-0">
+                            <svg className="w-full h-full opacity-[0.02] dark:opacity-[0.04]" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                              <defs>
+                                <pattern id="smallGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                                  <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                                  <path d="M 20 15 L 25 10 L 30 15" stroke="currentColor" strokeWidth="0.5" fill="none"/>
+                                  <path d="M 40 45 L 45 50 L 50 45" stroke="currentColor" strokeWidth="0.5" fill="none"/>
+                                </pattern>
+                              </defs>
+                              <rect width="100%" height="100%" fill="url(#smallGrid)"/>
+                            </svg>
+                          </div>
+                          <div className="relative flex items-center justify-between">
+                            <div className="flex flex-col items-start">
+                              <div className="flex items-center gap-2.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-purple-500">
+                                  <path fillRule="evenodd" d="M14.447 3.027a.75.75 0 01.527.92l-4.5 16.5a.75.75 0 01-1.448-.394l4.5-16.5a.75.75 0 01.921-.526zM16.72 6.22a.75.75 0 011.06 0l5.25 5.25a.75.75 0 010 1.06l-5.25 5.25a.75.75 0 11-1.06-1.06L21.44 12l-4.72-4.72a.75.75 0 010-1.06zm-9.44 0a.75.75 0 010 1.06L2.56 12l4.72 4.72a.75.75 0 11-1.06 1.06L.97 12.53a.75.75 0 010-1.06l5.25-5.25a.75.75 0 011.06 0z" clipRule="evenodd" />
+                                </svg>
+                                <h3 className="text-lg font-medium text-gray-900 dark:text-white">Website Content</h3>
+                              </div>
+                              <p className="text-sm text-gray-500 mt-1">Code artifact</p>
                             </div>
-                            <div className="prose dark:prose-invert text-gray-900 dark:text-gray-100 max-h-32 overflow-hidden relative">
-                              {message.content.length > 300 ? (
-                                <>
-                                  {message.content.slice(0, 300)}...
-                                  <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white dark:from-gray-800 to-transparent"></div>
-                                </>
-                              ) : (
-                                message.content
-                              )}
-                            </div>
-                            <div className="mt-4 flex items-center gap-2 border-t border-gray-100 dark:border-gray-700 pt-4">
-                              <button className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-                                <CopyIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                              </button>
-                              <button className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-                                <ThumbsUpIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                              </button>
-                              <button className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-                                <ThumbsDownIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                              </button>
-                              <button className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-                                <Volume2Icon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                              </button>
-                              <button className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-                                <LinkIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                              </button>
+                            <div className="w-8 h-8 flex items-center justify-center bg-orange-500 rounded-full shadow-sm group-hover:bg-orange-600 transition-colors">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-white">
+                                <path fillRule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clipRule="evenodd" />
+                              </svg>
                             </div>
                           </div>
                         </div>
@@ -206,22 +201,16 @@ export function MyAssistant() {
                 ))}
                 {isLoading && (
                   <div className="flex justify-start w-full">
-                    <div className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
-                      <div className="px-6 py-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="h-4 w-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                          <div className="h-4 w-16 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                    <div className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm p-6">
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-col items-start">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-5 h-5 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                            <div className="h-7 w-32 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                          </div>
+                          <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
                         </div>
-                        <div className="space-y-2">
-                          <div className="h-4 w-3/4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                          <div className="h-4 w-2/3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                          <div className="h-4 w-1/2 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                        </div>
-                        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex gap-2">
-                          {[1, 2, 3, 4, 5].map((i) => (
-                            <div key={i} className="h-8 w-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-                          ))}
-                        </div>
+                        <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
                       </div>
                     </div>
                   </div>
