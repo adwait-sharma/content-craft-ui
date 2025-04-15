@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { SendIcon, CopyIcon, ThumbsUpIcon, ThumbsDownIcon, XIcon, Volume2Icon, LinkIcon, SunIcon, MoonIcon } from 'lucide-react';
+import { Logo } from '@/app/components/Logo';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -71,18 +72,8 @@ export function MyAssistant() {
         <header className="border-b border-gray-200 dark:border-gray-700">
           <div className="px-6 py-4 flex items-center justify-between">
             <div className="flex items-center">
-              <svg
-                className="h-8 w-8 text-blue-600 dark:text-blue-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-              <span className="ml-3 text-xl font-semibold text-gray-900 dark:text-white">Content Craft</span>
+              <Logo className="h-8 w-8" />
+              <span className="ml-3 text-xl font-semibold text-gray-900 dark:text-white">Contentstack AI Studio</span>
             </div>
             {mounted && (
               <button
@@ -105,22 +96,56 @@ export function MyAssistant() {
           <div className="max-w-4xl mx-auto">
             {messages.length === 0 ? (
               // Welcome Screen
-              <div className="flex flex-col items-center justify-center h-full text-center py-20">
-                <svg
-                  className="h-24 w-24 text-blue-600 dark:text-blue-400 mb-8"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Welcome to Content Craft</h2>
-                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+              <div className="flex flex-col items-center justify-center min-h-[60vh] text-center py-8">
+                <Logo className="h-16 w-16 mb-6" />
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">
+                  Welcome to Contentstack AI Studio
+                </h2>
+                <h1 className="text-4xl font-serif text-gray-800 dark:text-gray-200 mb-4 tracking-normal">
+                  Hey there, Adwait
+                </h1>
+                <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mb-8">
                   Your AI-powered content assistant. Start typing below to craft amazing content together.
                 </p>
+                
+                {/* Pre-written Prompts */}
+                <div className="w-full max-w-5xl flex justify-center space-x-2">
+                  <button 
+                    onClick={() => setInput("Help me create a product description for an eco-friendly water bottle")}
+                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                  >
+                    <span className="text-sm text-gray-800 dark:text-gray-200">Product description</span>
+                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                  </button>
+                  <button 
+                    onClick={() => setInput("Generate a social media campaign for a new coffee shop")}
+                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                  >
+                    <span className="text-sm text-gray-800 dark:text-gray-200">Social media</span>
+                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                  </button>
+                  <button 
+                    onClick={() => setInput("Write a blog post about AI in content management")}
+                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                  >
+                    <span className="text-sm text-gray-800 dark:text-gray-200">Blog post</span>
+                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                  </button>
+                  <button 
+                    onClick={() => setInput("Create an email newsletter about upcoming tech trends")}
+                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                  >
+                    <span className="text-sm text-gray-800 dark:text-gray-200">Newsletter</span>
+                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                  </button>
+                  <button 
+                    onClick={() => setInput("Generate SEO-optimized website content for a fitness studio")}
+                    className="flex items-center justify-between px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all group"
+                  >
+                    <span className="text-sm text-gray-800 dark:text-gray-200">SEO content</span>
+                    <span className="text-gray-400 group-hover:text-purple-500 transition-colors ml-2">↗</span>
+                  </button>
+                </div>
               </div>
             ) : (
               // Chat Interface

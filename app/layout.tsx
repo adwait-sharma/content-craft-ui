@@ -6,8 +6,8 @@ import { ThemeProvider } from 'next-themes';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Content Craft',
-  description: 'AI-powered content assistant',
+  title: 'Contentstack AI Studio',
+  description: 'AI-powered content assistant by Contentstack',
 };
 
 export default function RootLayout({
